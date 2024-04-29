@@ -1,0 +1,6 @@
+
+*.pickle
+*.csv
+*.pkl
+*.json
+*.pyc
