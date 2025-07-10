@@ -12,12 +12,13 @@ from autogluon.tabular import TabularDataset, TabularPredictor
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import numpy as np
-
+import modeling_tool as ml
 import sys
-sys.path.append(r"C:\Users\Heng2020\OneDrive\Python MyLib\Python MyLib 01\02 DataFrame")
-import lib02_dataframe as ds
+
+import dataframe_short as ds
 from sklearn.metrics import classification_report
 from playsound import playsound
+
 
 def cat_metrics(y_true, y_pred):
     from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
@@ -29,9 +30,9 @@ def cat_metrics(y_true, y_pred):
     
     return out_dict
 
-df_path = r"C:\Users\Heng2020\OneDrive\Python Modeling\Modeling 01\Dataset Classification\08 ObesityRisk\08 ObesityRisk_train.csv"
-y_name = "NObeyesdad"
-saved_model_name = "AgModel Obesity_risk_v01"
+df_path = r"C:/Users/Heng2020/OneDrive/D_Code/Python/Python Modeling/Modeling 01/Dataset Binary Classification/02 InsuranceFraud_train.csv"
+y_name = "fraud_reported"
+saved_model_name = "AgModel Insurance_v01"
 
 # positive_class = "High"
 eval_metric='accuracy'
