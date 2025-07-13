@@ -20,13 +20,12 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
 import warnings
 
-import sys
-sys.path.append(r"C:\Users\Heng2020\OneDrive\Python MyLib\Python MyLib 01\02 DataFrame")
-import lib02_dataframe as ds
+
+import dataframe_short as ds
 
 
 
-df_path = r"C:\Users\Heng2020\OneDrive\Python Modeling\Modeling 01\Dataset Classification\08 ObesityRisk\08 ObesityRisk_train.csv"
+df_path = r"C:/Users/Norat/OneDrive/D_Code/Python/Python Modeling/Modeling 01/Dataset Classification/08 ObesityRisk/08 ObesityRisk_train.csv"
 y_name = "NObeyesdad"
 saved_model_name = "LightGBM Obesity_risk_v01"
 
@@ -74,8 +73,10 @@ null_report = ds.count_null(data)
 data = pd_preprocess(data)
 
 data = ds.num_to_cat(data,num_to_cat_col)
-cat_col = ds.pd_cat_column(data)
-data = ds.pd_to_category(data)
+cat_col = ds.cat_col(data)
+data = ds.to_category(data)
+
+
 
 X_train, X_test, y_train, y_test = train_test_split(
                                         data.drop(y_name, axis=1), 
@@ -116,7 +117,7 @@ callbacks = [lgb.log_evaluation(period=50)]
 model = lgb.LGBMClassifier()
 model.fit(X_train, y_train, eval_set=(X_test, y_test),callbacks=callbacks)
 
-# num_folds = 5
+num_folds = 5
 # kf = KFold(n_splits=num_folds, shuffle=True, random_state=mySeed)
 
 # results = []
@@ -141,7 +142,7 @@ model.fit(X_train, y_train, eval_set=(X_test, y_test),callbacks=callbacks)
 #     results.append(accuracy)
 
 
-cv_results = lgb.cv(params01, train_data,nfold=num_folds, stratified=True)
+# cv_results = lgb.cv(params01, train_data,nfold=num_folds, stratified=True)
 
 y_pred_train = model.predict(X_train)
 
